@@ -1,10 +1,13 @@
-const BASE = `https://graph.facebook.com/v19.0/${process.env.WA_PHONE_NUMBER_ID}/messages`;
+const TOKEN = 'EAAO1YFmbQlABRprVmYrHPbW5jxiZCSceRf9mJRIBG2PhWCKZAXZCgztXn9uZBZB6LZBy39fkTBmSArbFhk6oCvb5Xs4OYUyGoe1WRqZCvGAZBcVzuAaNLgwbrIYJEQZBUEgc8xJFaNnKQIltHDi3adgPBxi5TQphWZAskmwZCsyGZA7VPSWHHZAx2NtYqfUR0NfrdrtcbwcEZBAIsS7OZBHUO5jCZBEmQ74T6GtmQZCOj2VxafVCVtbsF9tAtfvRfWeGIoMD4KkMAKGsZBXotl2MBLvo0BJFh4wZBkZD';
+const PHONE_ID = '1186731034517960';
+
+const BASE = `https://graph.facebook.com/v25.0/${PHONE_ID}/messages`;
 
 async function post(body) {
   const res = await fetch(BASE, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.WA_TOKEN}`,
+      'Authorization': `Bearer ${TOKEN}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ messaging_product: 'whatsapp', ...body }),
@@ -20,12 +23,8 @@ export function sendOTP(phone, code) {
     to: phone,
     type: 'template',
     template: {
-      name: process.env.WA_TEMPLATE_NAME,
+      name: 'hello_world',
       language: { code: 'en_US' },
-      components: [{
-        type: 'body',
-        parameters: [{ type: 'text', text: code }], // {{1}} in your template
-      }],
     },
   });
 }
