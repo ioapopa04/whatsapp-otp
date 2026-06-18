@@ -26,8 +26,9 @@ app.post('/api/register', async (req, res) => {
     console.log(`OTP ${code} sent to ${phone}`);
     res.json({ ok: true, message: 'OTP sent — check WhatsApp' });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: 'Failed to send WhatsApp message' });
+    console.error("WA send failed:", err);
+    console.error("CAUSE:", err?.cause);
+    return res.status(500).json({ error: "Failed to send WhatsApp message", detail: String(err?.cause || err) });
   }
 });
 
