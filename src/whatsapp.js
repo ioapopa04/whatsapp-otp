@@ -39,7 +39,7 @@ export function sendOTP(phone, code) {
     to: phone,
     type: 'template',
     template: {
-      name: 'hello_world',
+      name: 'event_registration',
       language: { code: 'en_US' },
     },
   });
